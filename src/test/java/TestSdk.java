@@ -13,7 +13,7 @@ import java.util.List;
 public class TestSdk {
 
     //快递接口的地址
-    private String host = "http://127.0.0.1:9980/express/api";
+    private String host = "https://post.digitalsystem.net/express/api";
     //接口用户号
     private String accountNumber = "1612549086370B1D5";
     //接口用户密码

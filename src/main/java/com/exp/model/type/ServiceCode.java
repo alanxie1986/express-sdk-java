@@ -1,0 +1,16 @@
+package com.exp.model.type;
+
+public enum ServiceCode {
+    FEDEX_PRIORITY_OVERNIGHT,
+    FEDEX_2_DAY,
+    FEDEX_STANDARD_OVERNIGHT,
+    FEDEX_EXPRESS_SAVER,
+    FEDEX_GROUND,
+    FEDEX_GROUND_HOME_DELIVERY,
+
+    UPS_GROUND,
+    UPS_NEXT_DAY_AIR,
+    UPS_NEXT_DAY_AIR_SAVER,
+    UPS_2ND_DAY_AIR,
+    UPS_3_DAY_SELECT,
+}

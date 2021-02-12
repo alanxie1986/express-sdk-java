@@ -88,6 +88,8 @@ public class TestSdk {
 
         //假定返回的是成功结果
         Assert.assertEquals(shipmentResponse.getCode(),"SUCCESS");
+        //对返回结果验证签名
+        Assert.assertTrue(client.checkResponseIdentity(shipmentResponse.getIdentity(),accessKey));
 
         ResponseOrderData orderData = shipmentResponse.getData();
         String orderNumber = orderData.getOrderNumber();
@@ -116,7 +118,9 @@ public class TestSdk {
         QueryOrderResponse queryOrderResponse = client.orderDetail(queryOrderRequest);
 
         //假定返回的是成功结果
-        Assert.assertEquals(queryOrderResponse.getCode(),"SUCCESS");
+        Assert.assertEquals("SUCCESS",queryOrderResponse.getCode());
+        //对返回结果验证签名
+        Assert.assertTrue(client.checkResponseIdentity(queryOrderResponse.getIdentity(),accessKey));
 
         //构建查询订单参数
         CancelOrderRequest cancelOrderRequest = CancelOrderRequest.builder()
@@ -131,7 +135,8 @@ public class TestSdk {
         CancelOrderResponse cancelOrderResponse = client.cancelOrder(cancelOrderRequest);
 
         //假定返回的是成功结果
-        Assert.assertEquals(cancelOrderResponse.getCode(),"SUCCESS");
-
+        Assert.assertEquals("SUCCESS",cancelOrderResponse.getCode());
+        //对返回结果验证签名
+        Assert.assertTrue(client.checkResponseIdentity(cancelOrderResponse.getIdentity(),accessKey));
     }
 }

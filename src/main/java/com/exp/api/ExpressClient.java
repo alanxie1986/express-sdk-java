@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
@@ -98,6 +99,36 @@ public class ExpressClient {
                 .password(password)
                 .build();
         return identity;
+    }
+
+    /**
+     * 对接口返回的认证信息进行安全性检测
+     *
+     * @param responseIdentity
+     * @param accessKey
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
+    public boolean checkResponseIdentity(Identity responseIdentity, String accessKey) throws NoSuchAlgorithmException {
+        if (responseIdentity == null) {
+            return false;
+        }
+        String accountNumber = responseIdentity.getAccountNumber();
+        String responseId = responseIdentity.getResponseId();
+        String username = responseIdentity.getUserName();
+        BigDecimal balance = responseIdentity.getBalance();
+        String accessToken = responseIdentity.getAccessToken();
+        if (accountNumber == null || responseId == null || username == null || balance == null || accessToken == null) {
+            return false;
+        }
+
+        String ca = new StringBuilder("accountNumber=").append(accountNumber).append("&")
+                .append("balance=").append(balance).append("&")
+                .append("responseId=").append(responseId).append("&")
+                .append("username=").append(username).append("&")
+                .append("accessKey=").append(accessKey).toString();
+        String hash = MD5Util.calculateMd5(ca).toUpperCase();
+        return hash.equals(accessToken);
     }
 
     /**

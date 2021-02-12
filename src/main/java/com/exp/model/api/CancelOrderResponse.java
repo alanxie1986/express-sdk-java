@@ -1,5 +1,14 @@
 package com.exp.model.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CancelOrderResponse {
     public CancelOrderResponse(String code, String msg){
         this.code = code;
@@ -15,35 +24,4 @@ public class CancelOrderResponse {
         return ApiConstants.SUCCESS.equals(this.getCode());
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public ResponseOrderData getData() {
-        return data;
-    }
-
-    public void setData(ResponseOrderData data) {
-        this.data = data;
-    }
-
-    public Identity getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(Identity identity) {
-        this.identity = identity;
-    }
 }
